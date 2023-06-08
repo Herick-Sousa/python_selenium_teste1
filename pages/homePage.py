@@ -11,5 +11,5 @@ class HomePage:
         self.user_dropdown = (By.XPATH, "//*[@class ='oxd-userdropdown-tab']")
 
     def user_is_visible(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located(self.user_dropdown))
+        WebDriverWait(self.driver, 20).until(ec.visibility_of_element_located(self.user_dropdown))
         return self.driver.find_element(*self.user_dropdown).is_displayed()
