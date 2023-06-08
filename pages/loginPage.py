@@ -10,7 +10,7 @@ class LoginPage:
         self.username_input = (By.NAME, "username")
         self.password_input = (By.NAME, "password")
         self.login_button = (By.XPATH, "//*[@type='submit']")
-        self.error_msg = (By.XPATH, "//*[@role='alert2']")
+        self.error_msg = (By.XPATH, "//*[@role='alert']")
 
     def login(self, username, password):
         self.enter_username(username)
