@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Manual dispatch event
+  workflow_dispatch:
   schedule:
     - cron: '0 9 * * *'  # Schedule to run every day at 9 am
 
@@ -26,12 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Download Chrome WebDriver
-        run: |
-          curl -sSL -o chromedriver.zip https://chromedriver.storage.googleapis.com/LATEST_RELEASE
-          curl -sSL -o chromedriver_win32.zip https://chromedriver.storage.googleapis.com/$(cat chromedriver.zip)/chromedriver_win32.zip
-          tar -xf chromedriver_win32.zip
+      - name: Set up ChromeDriver
+        uses: nanovms/setup-chrome-driver@v1
 
       - name: Run tests
         run: |
-          python -m unittest discover -s ${{ github.workspace }}/tests -p "test_*.py" -t ${{ github.workspace }}
+          python -m unittest discover -s tests -p "test_*.py"
