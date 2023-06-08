@@ -26,8 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Set up Chrome WebDriver
-        uses: nanovms/setup-chrome-driver@v1
+      - name: Download Chrome WebDriver
+        run: |
+          curl -sSL -o chromedriver.zip https://chromedriver.storage.googleapis.com/LATEST_RELEASE
+          curl -sSL -o chromedriver_win32.zip https://chromedriver.storage.googleapis.com/$(cat chromedriver.zip)/chromedriver_win32.zip
+          tar -xf chromedriver_win32.zip
 
       - name: Run tests
         run: |
