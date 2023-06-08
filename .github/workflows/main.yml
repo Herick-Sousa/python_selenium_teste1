@@ -26,8 +26,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Set up ChromeDriver
-        uses: nanovms/setup-chrome-driver@v1
+      - name: Download and extract ChromeDriver
+        run: |
+          curl -LO https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_win32.zip
+          7z x chromedriver_win32.zip -oC:\tools
+          del chromedriver_win32.zip
+
+      - name: Add ChromeDriver to PATH
+        run: |
+          echo "::add-path::C:\tools"
 
       - name: Run tests
         run: |
